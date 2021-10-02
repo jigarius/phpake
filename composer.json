@@ -14,5 +14,6 @@
     "psr-4": {
       "PHPake\\": "src/"
     }
-  }
+  },
+  "bin": ["bin/phpake"]
 }

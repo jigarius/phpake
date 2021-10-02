@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * A task that takes no input and shows no output.
+ *
+ * @task
+ */
+function task1() {
+
+}
+
+/**
+ * A task that takes no input and shows some output.
+ *
+ * @task
+ */
+function task1($output) {
+  print('Hello world.');
+}
+
+/**
+ * A task that requires a "name" parameter, but shows no output.
+ *
+ * @task
+ */
+function task2($name) {
+  print("Hello, $name");
+}
+
+/**
+ * A task that takes an input manager and an output manager.
+ *
+ * @task
+ */
+function task4($input, $output) {
+  print('Hello world.');
+}
