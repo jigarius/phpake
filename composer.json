@@ -1,0 +1,18 @@
+{
+  "name": "jigarius/phpake",
+  "description": "A make-like built on PHP.",
+  "type": "project",
+  "authors": [
+    {
+      "name": "Jigar Mehta",
+      "email": "hello@jigarius.com",
+      "homepage": "https://jigarius.com/"
+    }
+  ],
+  "require": {  },
+  "autoload": {
+    "psr-4": {
+      "PHPake\\": "src/"
+    }
+  }
+}
