@@ -1,4 +1,14 @@
 #!/usr/bin/env php
 <?php
 
-require __DIR__ . '/../src/PHPake.php';
+if (php_sapi_name() !== 'cli') exit;
+
+require_once __DIR__ . '/../vendor/autoload.php';
+
+try {
+  $phpake = new PHPake();
+  $phpake->run();
+}
+catch (Exception $e) {
+  echo "ERROR {$e->getCode()}: {$e->getMessage()}";
+}

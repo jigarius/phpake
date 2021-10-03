@@ -15,7 +15,10 @@
   "autoload": {
     "psr-4": {
       "PHPake\\": "src/"
-    }
+    },
+    "classmap": [
+      "src/PHPake.php"
+    ]
   },
   "bin": ["bin/phpake"]
 }
