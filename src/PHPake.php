@@ -5,6 +5,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\ConsoleOutput;
+use PHPake\Commands\ExecCommand;
 
 /**
  * A make-like built on PHP.
@@ -33,16 +34,37 @@ class PHPake extends Application {
     $this->output = new ConsoleOutput();
     $this->configureIO($this->input, $this->output);
 
-    $this->discoverTasks();
-  }
-
-  private function discoverTasks() {
     $phpakefile = $this->discoverPhpakefile();
     if (!$phpakefile) {
+      // TODO: Raise an exception instead.
       exit(1);
     }
 
-    // TODO: Parse Phakefile for tasks.
+    $this->require($phpakefile);
+  }
+
+  public function require(string $path) {
+    if (!is_file($path)) {
+      // TODO: Raise an exception instead.
+      exit(1);
+    }
+
+    $old_funcs = get_defined_functions()['user'];
+    require $path;
+    $new_funcs = get_defined_functions()['user'];
+    $task_funcs = array_diff($new_funcs, $old_funcs);
+
+    if (!$task_funcs) {
+      // TODO: Raise an exception instead.
+      exit(1);
+    }
+
+    foreach ($task_funcs as $func) {
+      $reflection = new ReflectionFunction($func);
+      $command = new ExecCommand($reflection->getName());
+
+      $this->add($command);
+    }
   }
 
   /**
@@ -53,7 +75,7 @@ class PHPake extends Application {
     do {
       $path = $lookup_path . DIRECTORY_SEPARATOR . 'Phpakefile';
       if (is_file($path)) {
-        $this->output->writeln("Phpakefile: $phpakefile", Output::VERBOSITY_VERBOSE);
+        $this->output->writeln("Phpakefile: $path", ConsoleOutput::VERBOSITY_VERBOSE);
         return $path;
       }
 
