@@ -1,7 +1,7 @@
 FROM php:8-alpine
 WORKDIR /app
 
-RUN php --version
+RUN apk add make
 
 COPY . /app
 

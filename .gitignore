@@ -1,4 +1,11 @@
+# JetBrains IDE data.
 .idea
+
+# Packages installed by composer.
 /vendor
 
+# Other
+.phpunit.cache
+
+# This Phpakefile is used for experimenting during development.
 Phpakefile
