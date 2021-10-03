@@ -5,9 +5,11 @@ if (php_sapi_name() !== 'cli') exit;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use PHPake\PHPakeFile;
+
 try {
   $phpake = new PHPake();
-  $phpakefile = $phpake->discoverPhpakefile();
+  $phpake->require(PHPakeFile::discover());
   $phpake->run();
 }
 catch (Exception $e) {
