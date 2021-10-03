@@ -13,6 +13,11 @@ use PHPake\Commands\ExecCommand;
 class PHPake extends Application {
 
   /**
+   * Application name.
+   */
+  const NAME = 'PHPake';
+
+  /**
    * @var Symfony\Component\Console\Input\ArgvInput
    */
   private ArgvInput $input;
@@ -27,20 +32,12 @@ class PHPake extends Application {
    */
   public function __construct() {
     parent::__construct();
-    $this->setName('PHPake');
+    $this->setName(self::NAME);
     $this->setVersion('0.0.1');
 
     $this->input = new ArgvInput();
     $this->output = new ConsoleOutput();
     $this->configureIO($this->input, $this->output);
-
-    $phpakefile = $this->discoverPhpakefile();
-    if (!$phpakefile) {
-      // TODO: Raise an exception instead.
-      exit(1);
-    }
-
-    $this->require($phpakefile);
   }
 
   public function require(string $path) {
@@ -50,7 +47,7 @@ class PHPake extends Application {
     }
 
     $old_funcs = get_defined_functions()['user'];
-    require $path;
+    require_once $path;
     $new_funcs = get_defined_functions()['user'];
     $task_funcs = array_diff($new_funcs, $old_funcs);
 
@@ -68,9 +65,11 @@ class PHPake extends Application {
   }
 
   /**
+   * @todo Raise exception if no file is found.
+   * @todo Create class Phpakefile.
    * @todo Add Windows compatibility?
    */
-  private function discoverPhpakefile(): ?string {
+  public function discoverPhpakefile(): ?string {
     $lookup_path = getcwd();
     do {
       $path = $lookup_path . DIRECTORY_SEPARATOR . 'Phpakefile';
