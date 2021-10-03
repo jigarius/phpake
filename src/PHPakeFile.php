@@ -2,8 +2,6 @@
 
 namespace PHPake;
 
-use http\Exception\RuntimeException;
-
 /**
  * A file defining tasks.
  */
@@ -18,7 +16,7 @@ class PHPakeFile {
 
   public function __construct(string $path) {
     if (!is_file($path)) {
-      throw new RuntimeException("File not found: $path");
+      throw new \RuntimeException("File not found: $path");
     }
 
     if (in_array($path, get_included_files())) {
@@ -36,17 +34,17 @@ class PHPakeFile {
     return $this->path;
   }
 
-  public function getTasks(): array {
+  public function getCallbacks(): array {
     $old_funcs = get_defined_functions()['user'];
     require_once $this->path;
     $new_funcs = get_defined_functions()['user'];
 
-    $task_funcs = array_diff($new_funcs, $old_funcs);
-    foreach ($task_funcs as $key => $task_func) {
-      echo $task_func;
-    }
+    return array_diff($new_funcs, $old_funcs);
 
-    return $task_funcs;
+    $task_funcs = array_diff($new_funcs, $old_funcs);
+    return array_map(function($callable) {
+      return new Task($callable);
+    }, $task_funcs);
   }
 
   public static function discover(): ?string {

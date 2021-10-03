@@ -44,12 +44,10 @@ class PHPake extends Application {
 
   public function require(string $path) {
     $file = new PHPakeFile($path);
-    foreach ($file->getTasks() as $func) {
-      $reflection = new ReflectionFunction($func);
-      $command = new ExecCommand($reflection->getName());
-
+    foreach ($file->getCallbacks() as $callback) {
+      $command = new ExecCommand($callback);
       $this->add($command);
-      $this->output->writeln("Added task: $func()", ConsoleOutput::VERBOSITY_DEBUG);
+      $this->output->writeln("Added task: $callback()", ConsoleOutput::VERBOSITY_DEBUG);
     }
   }
 
