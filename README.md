@@ -1,3 +1,3 @@
 # PHPake
 
-PHPake (pronounced fake) is make-like built on PHP.
+PHPake (pronounced fake) is a make-like utility built on PHP.
