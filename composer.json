@@ -20,5 +20,8 @@
       "src/PHPake.php"
     ]
   },
-  "bin": ["bin/phpake"]
+  "bin": ["bin/phpake"],
+  "require-dev": {
+    "squizlabs/php_codesniffer": "^3.6"
+  }
 }
