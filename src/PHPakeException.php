@@ -2,4 +2,9 @@
 
 namespace PHPake;
 
-class PHPakeException extends \Exception {}
+/**
+ * Base PHPake Exception.
+ */
+class PHPakeException extends \Exception {
+
+}

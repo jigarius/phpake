@@ -8,7 +8,7 @@ namespace PHPake;
 class PHPakeFile {
 
   /**
-   * /path/to/Phpakefile
+   * A /path/to/Phpakefile.
    *
    * @var string
    */
@@ -40,11 +40,6 @@ class PHPakeFile {
     $new_funcs = get_defined_functions()['user'];
 
     return array_diff($new_funcs, $old_funcs);
-
-    $task_funcs = array_diff($new_funcs, $old_funcs);
-    return array_map(function($callable) {
-      return new Task($callable);
-    }, $task_funcs);
   }
 
   public static function discover(): ?string {

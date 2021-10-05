@@ -7,7 +7,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use PHPake\Commands\ExecCommand;
 use PHPake\PHPakeFile;
-use PHPake\PHPakeException;
 
 /**
  * A make-like built on PHP.
@@ -19,14 +18,8 @@ class PHPake extends Application {
    */
   const NAME = 'PHPake';
 
-  /**
-   * @var Symfony\Component\Console\Input\ArgvInput
-   */
   private ArgvInput $input;
 
-  /**
-   * @var Symfony\Component\Console\Output\ConsoleOutput
-   */
   private ConsoleOutput $output;
 
   /**
