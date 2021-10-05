@@ -3,6 +3,7 @@
 namespace PHPake\Commands;
 
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use PHPake\Task;
@@ -21,12 +22,25 @@ class ExecCommand extends Command {
     $task = new Task($this->getName());
     $this->setName($task->getCommand());
     $this->setDescription($task->getDescription());
+
+    foreach ($task->getParameters() as $parameter) {
+      $this->addArgument(
+        $parameter->getName(),
+        $parameter->isOptional() ? InputArgument::OPTIONAL : InputArgument::REQUIRED,
+        // TODO: Include description.
+        '',
+        $parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : NULL,
+      );
+    }
+
     $this->task = $task;
   }
 
   protected function execute(InputInterface $input, OutputInterface $output) {
-    $result = $this->task->execute();
-    return is_int($result) ? $result : 0;
+    $args = $input->getArguments();
+    unset($args['command']);
+
+    return $this->task->execute($args);
   }
 
 }
