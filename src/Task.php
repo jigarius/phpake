@@ -3,6 +3,7 @@
 namespace PHPake;
 
 use phpDocumentor\Reflection\DocBlockFactory;
+use PHPake\Argument\Argument;
 
 /**
  * A task, i.e. a command.
@@ -12,6 +13,8 @@ class Task extends \stdClass {
   protected string $callback;
 
   protected \ReflectionFunction $reflection;
+
+  protected array $arguments;
 
   public function __construct(callable $callback) {
     $this->callback = $callback;
@@ -36,10 +39,14 @@ class Task extends \stdClass {
   /**
    * Get parameters for the callback associated to the task.
    *
-   * @return Argument[]
+   * @return \PHPake\Argument\ArgumentInterface[]
    *   Callback parameters.
    */
   public function getArguments(): array {
+    if (isset($this->arguments)) {
+      return $this->arguments;
+    }
+
     $docblockParams = [];
 
     /** @var \phpDocumentor\Reflection\DocBlock\Tags\Param $param */
@@ -51,7 +58,7 @@ class Task extends \stdClass {
     $result = [];
     foreach ($this->reflection->getParameters() as $reflParam) {
       $name = $reflParam->getName();
-      $result[$name] = new Argument(
+      $result[$name] = Argument::create(
         $name,
         $docblockParams[$name] ? $docblockParams[$name]['description'] : '',
         $reflParam->isOptional(),
@@ -59,7 +66,7 @@ class Task extends \stdClass {
       );
     }
 
-    return $result;
+    return $this->arguments = $result;
   }
 
   /**

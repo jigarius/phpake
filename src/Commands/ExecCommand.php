@@ -38,15 +38,15 @@ class ExecCommand extends Command {
   protected function execute(InputInterface $input, OutputInterface $output) {
     $args = $input->getArguments();
 
-    if (!array_key_exists('command', $args)) {
+    if (!array_key_exists('command', $this->task->getArguments())) {
       unset($args['command']);
     }
 
-    if (array_key_exists('input', $args)) {
+    if (array_key_exists('input', $this->task->getArguments())) {
       $args['input'] = $input;
     }
 
-    if (array_key_exists('output', $args)) {
+    if (array_key_exists('output', $this->task->getArguments())) {
       $args['output'] = $output;
     }
 
