@@ -17,7 +17,7 @@ class Task extends \stdClass {
   }
 
   public function getName(): string {
-    $this->callback;
+    return $this->callback;
   }
 
   public function getDescription(): string {
