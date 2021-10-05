@@ -23,13 +23,12 @@ class ExecCommand extends Command {
     $this->setName($task->getCommand());
     $this->setDescription($task->getDescription());
 
-    foreach ($task->getParameters() as $parameter) {
+    foreach ($task->getArguments() as $argument) {
       $this->addArgument(
-        $parameter->getName(),
-        $parameter->isOptional() ? InputArgument::OPTIONAL : InputArgument::REQUIRED,
-        // TODO: Include description.
-        '',
-        $parameter->isDefaultValueAvailable() ? $parameter->getDefaultValue() : NULL,
+        $argument->name,
+        $argument->isOptional ? InputArgument::OPTIONAL : InputArgument::REQUIRED,
+        $argument->description,
+        $argument->defaultValue,
       );
     }
 
@@ -38,7 +37,10 @@ class ExecCommand extends Command {
 
   protected function execute(InputInterface $input, OutputInterface $output) {
     $args = $input->getArguments();
-    unset($args['command']);
+
+    if (!array_key_exists('command', $args)) {
+      unset($args['command']);
+    }
 
     if (array_key_exists('input', $args)) {
       $args['input'] = $input;

@@ -36,11 +36,30 @@ class Task extends \stdClass {
   /**
    * Get parameters for the callback associated to the task.
    *
-   * @return \ReflectionParameter[]
+   * @return Argument[]
    *   Callback parameters.
    */
-  public function getParameters(): array {
-    return $this->reflection->getParameters();
+  public function getArguments(): array {
+    $docblockParams = [];
+
+    /** @var \phpDocumentor\Reflection\DocBlock\Tags\Param $param */
+    foreach ($this->docblock->getTagsByName('param') as $docblockParam) {
+      $name = $docblockParam->getVariableName();
+      $docblockParams[$name]['description'] = $docblockParam->getDescription()->render();
+    }
+
+    $result = [];
+    foreach ($this->reflection->getParameters() as $reflParam) {
+      $name = $reflParam->getName();
+      $result[$name] = new Argument(
+        $name,
+        $docblockParams[$name] ? $docblockParams[$name]['description'] : '',
+        $reflParam->isOptional(),
+        $reflParam->isDefaultValueAvailable() ? $reflParam->getDefaultValue() : NULL
+      );
+    }
+
+    return $result;
   }
 
   /**
