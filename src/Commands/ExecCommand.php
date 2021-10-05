@@ -24,11 +24,20 @@ class ExecCommand extends Command {
     $this->setDescription($task->getDescription());
 
     foreach ($task->getArguments() as $argument) {
+      if ($argument->getIsBuiltIn()) {
+        continue;
+      }
+
+      $mode = $argument->isOptional ? InputArgument::OPTIONAL : InputArgument::REQUIRED;
+      if ($argument->getName() === 'rest') {
+        $mode = $mode | InputArgument::IS_ARRAY;
+      }
+
       $this->addArgument(
-        $argument->name,
-        $argument->isOptional ? InputArgument::OPTIONAL : InputArgument::REQUIRED,
-        $argument->description,
-        $argument->defaultValue,
+        $argument->getName(),
+        $mode,
+        $argument->getDescription(),
+        $argument->getDefaultValue(),
       );
     }
 
@@ -36,18 +45,13 @@ class ExecCommand extends Command {
   }
 
   protected function execute(InputInterface $input, OutputInterface $output) {
-    $args = $input->getArguments();
+    $values = $input->getArguments();
+    $values['input'] = $input;
+    $values['output'] = $output;
 
-    if (!array_key_exists('command', $this->task->getArguments())) {
-      unset($args['command']);
-    }
-
-    if (array_key_exists('input', $this->task->getArguments())) {
-      $args['input'] = $input;
-    }
-
-    if (array_key_exists('output', $this->task->getArguments())) {
-      $args['output'] = $output;
+    $args = [];
+    foreach ($this->task->getArguments() as $name => $argument) {
+      $args[$name] = $values[$name];
     }
 
     return $this->task->execute($args);

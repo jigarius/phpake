@@ -21,6 +21,11 @@ class Task extends \stdClass {
     $this->reflection = new \ReflectionFunction($callback);
 
     $factory = DocBlockFactory::createInstance();
+    if ($this->reflection->getDocComment() === FALSE) {
+      $this->docblock = $factory->create("/**\n*/");
+      return;
+    }
+
     $this->docblock = $factory->create($this->reflection);
   }
 
@@ -29,7 +34,7 @@ class Task extends \stdClass {
   }
 
   public function getDescription(): string {
-    return $comment = $this->docblock->getSummary();
+    return $this->docblock->getSummary();
   }
 
   public function getCommand(): string {
@@ -60,7 +65,7 @@ class Task extends \stdClass {
       $name = $reflParam->getName();
       $result[$name] = Argument::create(
         $name,
-        $docblockParams[$name] ? $docblockParams[$name]['description'] : '',
+        isset($docblockParams[$name]) ? $docblockParams[$name]['description'] : '',
         $reflParam->isOptional(),
         $reflParam->isDefaultValueAvailable() ? $reflParam->getDefaultValue() : NULL
       );

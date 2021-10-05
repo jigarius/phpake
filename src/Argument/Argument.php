@@ -48,6 +48,10 @@ class Argument implements ArgumentInterface {
       return new ConsoleOutputArgument($name);
     }
 
+    if ($name === 'rest') {
+      return new RestArgument($name, $description, $isOptional, $defaultValue);
+    }
+
     return new Argument($name, $description, $isOptional, $defaultValue);
   }
 
@@ -67,7 +71,16 @@ class Argument implements ArgumentInterface {
   }
 
   public function getDescription(): string {
-    return $this->description;
+    $description = $this->description;
+
+    if ($this->isBuiltIn) {
+      $description = "[Built-in] $description";
+    }
+    elseif ($this->isOptional) {
+      $description = "[Optional] $description";
+    }
+
+    return $description;
   }
 
   public function getIsOptional(): bool {
