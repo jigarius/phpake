@@ -1,15 +1,18 @@
 {
   "name": "jigarius/phpake",
-  "description": "A make-like built on PHP.",
-  "type": "project",
+  "description": "Phpake is a make-like utility built for PHP.",
+  "homepage": "https://github.com/jigarius/phpake",
+  "license": "GPL-3.0-only",
+  "keywords": [],
   "authors": [
     {
       "name": "Jigar Mehta",
-      "email": "hello@jigarius.com",
-      "homepage": "https://jigarius.com/"
+      "homepage": "https://jigarius.com/",
+      "role": "Developer"
     }
   ],
   "require": {
+    "php": ">= 8.0",
     "symfony/console": "^5.3",
     "phpdocumentor/reflection-docblock": "^5.2"
   },
