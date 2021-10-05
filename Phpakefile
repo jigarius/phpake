@@ -68,3 +68,10 @@ function flight_path(string $origin, $output, array $rest) {
   }
   $output->writeln("Destination: $destination");
 }
+
+/**
+ * A task that fails and returns a non-zero error code.
+ */
+function make_a_mess() {
+  return 19;
+}
