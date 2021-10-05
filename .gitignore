@@ -6,6 +6,3 @@
 
 # Other
 .phpunit.cache
-
-# This Phpakefile is used for experimenting during development.
-Phpakefile
