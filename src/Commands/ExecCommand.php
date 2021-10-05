@@ -40,6 +40,14 @@ class ExecCommand extends Command {
     $args = $input->getArguments();
     unset($args['command']);
 
+    if (array_key_exists('input', $args)) {
+      $args['input'] = $input;
+    }
+
+    if (array_key_exists('output', $args)) {
+      $args['output'] = $output;
+    }
+
     return $this->task->execute($args);
   }
 
