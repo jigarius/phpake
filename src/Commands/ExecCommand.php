@@ -15,15 +15,18 @@ use PHPake\Task;
  */
 class ExecCommand extends Command {
 
+  private Task $task;
+
   protected function configure() {
     $task = new Task($this->getName());
     $this->setName($task->getCommand());
     $this->setDescription($task->getDescription());
+    $this->task = $task;
   }
 
   protected function execute(InputInterface $input, OutputInterface $output) {
-    call_user_func_array($this->callback, []);
-    return 0;
+    $result = $this->task->execute();
+    return is_int($result) ? $result : 0;
   }
 
 }

@@ -38,4 +38,8 @@ class Task extends \stdClass {
     return str_replace('_', '-', $this->callback);
   }
 
+  public function execute() {
+    return call_user_func_array($this->callback, []);
+  }
+
 }
