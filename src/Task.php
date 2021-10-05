@@ -2,6 +2,8 @@
 
 namespace PHPake;
 
+use phpDocumentor\Reflection\DocBlockFactory;
+
 /**
  * A task, i.e. a command.
  */
@@ -14,6 +16,9 @@ class Task extends \stdClass {
   public function __construct(callable $callback) {
     $this->callback = $callback;
     $this->reflection = new \ReflectionFunction($callback);
+
+    $factory = DocBlockFactory::createInstance();
+    $this->docblock = $factory->create($this->reflection);
   }
 
   public function getName(): string {
@@ -21,17 +26,7 @@ class Task extends \stdClass {
   }
 
   public function getDescription(): string {
-    $comment = $this->reflection->getDocComment();
-    $lines = preg_split("/\r\n|\n|\r/", $comment);
-
-    array_shift($lines);
-    array_pop($lines);
-
-    foreach ($lines as &$line) {
-      $line = preg_replace('@^(\s+\**\s*)@', '', $line);
-    }
-
-    return $lines[0] ?? '';
+    return $comment = $this->docblock->getSummary();
   }
 
   public function getCommand(): string {

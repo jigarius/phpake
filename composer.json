@@ -10,7 +10,8 @@
     }
   ],
   "require": {
-    "symfony/console": "^5.3"
+    "symfony/console": "^5.3",
+    "phpdocumentor/reflection-docblock": "^5.2"
   },
   "autoload": {
     "psr-4": {
