@@ -33,8 +33,12 @@ class Task extends \stdClass {
     return $this->callback;
   }
 
-  public function getDescription(): string {
+  public function getSummary(): string {
     return $this->docblock->getSummary();
+  }
+
+  public function getDescription(): string {
+    return $this->docblock->getDescription();
   }
 
   public function getCommand(): string {
