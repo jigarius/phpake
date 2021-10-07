@@ -29,24 +29,64 @@ class Task extends \stdClass {
     $this->docblock = $factory->create($this->reflection);
   }
 
-  public function getName(): string {
+  /**
+   * Returns the name of the callback that defines and executes the task.
+   *
+   * @return string
+   *   Function name.
+   */
+  public function getCallback(): string {
     return $this->callback;
   }
 
+  /**
+   * Returns a summary for the task.
+   *
+   * This is derived from the first line of the function's docblock.
+   *
+   * @return string
+   *   A summary.
+   */
   public function getSummary(): string {
     return $this->docblock->getSummary();
   }
 
+  /**
+   * Returns a description for the task.
+   *
+   * This is derived from the function's docblock, excluding the first line.
+   *
+   * @return string
+   *   A description.
+   */
   public function getDescription(): string {
     return $this->docblock->getDescription();
   }
 
+  /**
+   * Returns the name of the command associated to this task.
+   *
+   * @return string
+   *   Command name.
+   */
   public function getCommand(): string {
-    return str_replace(['_', '\\'], ['-', ':'], $this->callback);
+    return str_replace(
+      ['_', '\\'],
+      ['-', ':'],
+      strtolower($this->callback)
+    );
   }
 
+  /**
+   * Returns usage examples for the command.
+   *
+   * This is derived from usage tags in the function's docblock.
+   *
+   * @return array
+   *   Usage examples.
+   */
   public function getUsages(): array {
-    return $this->docblock->getTagsByName('usage');
+    return array_map('strval', $this->docblock->getTagsByName('usage'));
   }
 
   /**
@@ -104,7 +144,7 @@ class Task extends \stdClass {
    *   Callback arguments.
    *
    * @return int
-   *   An exit code.
+   *   Exit code.
    */
   public function execute(array $args): int {
     $result = call_user_func_array($this->callback, $args);
