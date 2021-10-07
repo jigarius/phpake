@@ -1,12 +1,12 @@
 # Phpake
 
 Phpake is a make-like utility built for PHP. It is pronounced *fake* because
-the second *p* is silent just like the word *elephpant*.
+the second *p* is silent just like the second `p` in the word *elephpant*.
 
-I've always found writing a `Makefile` quite challenging because its syntax
-is similar to the shell syntax, but it is very different at the same time.
-When I'm working on Ruby, I use `rake` and it was awesome because it uses
-Ruby syntax. But when I work on PHP, I often miss having a similar tool that
+I've always found writing a `Makefile` quite challenging because the syntax
+is similar to the shell syntax, but quite different at the same time.
+When I'm working with Ruby, I use `rake` and it's awesome because it uses
+Ruby syntax. When I work with PHP, I often miss having a similar tool that
 is easy to install, easy to use, and allows full-fledged PHP syntax. Thus,
 Phpake was born.
 
@@ -38,7 +38,7 @@ You should then be able to run it with `composer exec phpake`.
 
 ## Usage
 
-To use Phpake, you start by creating a `Phpakefile` where you define tasks.
+To use Phpake, start by creating a `Phpakefile` to define some tasks.
 Each task is simply a PHP function. You can read more on creating a
 `Phpakefile` under the [Phpakefile](#Phpakefile) section.
 
@@ -52,9 +52,15 @@ containing a `Phpakefile`.
 
 ## Phpakefile
 
-The following subheadings talk about writing tasks in a `Phpakefile`. A
-Phpake task definition is simply a PHP function (a task callback). Here's
-a sample [Phpakefile](Phpakefile) to inspire you.
+A *Phpakefile* contains definitions of tasks that can be executed by Phpake. 
+The following subheadings are about defining such tasks. A Phpake task definition
+is simply a PHP function (a task callback). Here's are some examples:
+
+- [Hello world](Phpakefile)
+- [Input Output](examples/input-output.phpakefile)
+- [Namespaces](examples/variadic.phpakefile)
+- [Variadic arguments](examples/variadic.phpakefile)
+- [Shell commands](examples/shell.phpakefile)
 
 ## Simple tasks
 
@@ -70,7 +76,8 @@ function hello_world() {
 }
 ```
 
-This task can then be executed as `phpake hello-world`.
+This task can then be executed as `phpake hello-world`. You can also organize
+functions with PHP namespaces.
 
 ## Regular Parameters
 
@@ -83,16 +90,15 @@ function hello_human($fname, $lname = NULL) {
 }
 ```
 
-Since `$lname` has a default value, it is treated as an optional argument. So,
-this task can be executed as `phpake Niki` or `phpake Niki Martin`.
+Since `$lname` has a default value, it is treated as an optional argument.
 
 ## Special parameters
 
-Phpake is build with [Symfony Console](https://symfony.com/doc/current/components/console.html),
+Phpake is built with [Symfony Console](https://symfony.com/doc/current/components/console.html),
 which provides certain special parameters that can help you enrich your
-application even further. If your task has a  parameter with one of these
-special names, it will behave specially. You can read more about some of these
-objects in the Symfony Console documentation.
+application even further. If your task has a parameter with one of these
+special names, it will behave specially. For more info on these objects,
+please refer to the Symfony Console documentation.
 
 ### $input
 
@@ -116,9 +122,12 @@ The text included in `<info></info>` will appear in color.
 Name of the Symfony Console command that is being executed. It looks like the
 task function name with some minor differences.
 
+- For a `function hello_world()` the command becomes `hello-world`
+- If defined in a namespace, it becomes `namespace:hello-world`.
+
 ### $rest
 
-There are often tasks that can accept an unlimited number of arguments. These
+Often there are tasks that can accept an unlimited number of arguments. These
 can be handled with a `$rest` parameter. It **must be** defined as the last
 argument to your function.
 
