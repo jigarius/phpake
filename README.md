@@ -135,3 +135,18 @@ otherwise, it requires one or more values.
 
 This project uses a Dockerized development environment. Run the project as
 you would any other docker-compose based project.
+
+When developing for the first time,
+
+- Clone the repository with `git clone`
+- `cd` into the cloned repository
+- Build Docker images: `docker compose build`
+- Bring up the containers: `docker compose up -d`
+
+After the initial setup, you can use the following commands:
+
+- `docker compose start`: Start the project's containers
+- `docker compose exec main sh`: Launch a shell inside the project's container
+  - You'll spend most of your time here
+  - The command `phpake` should be available
+- `docker compose stop`: Stops the project's containers when you're done
