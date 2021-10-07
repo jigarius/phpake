@@ -55,6 +55,7 @@ class Task extends \stdClass {
    * If the callback name starts with an underscore, the command is hidden.
    *
    * @return bool
+   *   True or False.
    */
   public function isHidden(): bool {
     return str_starts_with($this->reflection->getShortName(), '_');
