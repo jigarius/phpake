@@ -1,6 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use Phpake\Phpake;
 
 /**
  * @covers Phpake

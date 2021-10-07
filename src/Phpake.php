@@ -1,12 +1,13 @@
 <?php
 
+namespace Phpake;
+
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\ConsoleOutput;
 use Phpake\Commands\ExecCommand;
-use Phpake\PhpakeFile;
 
 /**
  * A make-like built on PHP.

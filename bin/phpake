@@ -21,6 +21,7 @@ foreach ($autoload_candidates as $candidate) {
 }
 unset($autoload_candidates);
 
+use Phpake\Phpake;
 use Phpake\PhpakeFile;
 
 try {
