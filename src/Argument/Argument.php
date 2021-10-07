@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPake\Argument;
+namespace Phpake\Argument;
 
 /**
  * A standard argument.

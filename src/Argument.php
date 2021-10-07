@@ -1,6 +1,6 @@
 <?php
 
-namespace PHPake;
+namespace Phpake;
 
 /**
  * An argument defined by a task.

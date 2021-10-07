@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="PHPake Standard" namespace="PHPake\CS\Standard">
-    <description>A coding standard for PHPake.</description>
+<ruleset name="Phpake Standard" namespace="Phpake\CS\Standard">
+    <description>A coding standard for Phpake.</description>
     <file>.</file>
     <exclude-pattern>.docker/*</exclude-pattern>
     <exclude-pattern>.phpunit.cache/*</exclude-pattern>

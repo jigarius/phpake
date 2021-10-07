@@ -1,11 +1,11 @@
 <?php
 
-namespace PHPake;
+namespace Phpake;
 
 /**
  * A file defining tasks.
  */
-class PHPakeFile {
+class PhpakeFile {
 
   /**
    * A /path/to/Phpakefile.
@@ -53,7 +53,7 @@ class PHPakeFile {
       $path = dirname($path);
     } while ($path !== DIRECTORY_SEPARATOR);
 
-    throw new PHPakeException('Phpakefile not detected.');
+    throw new PhpakeException('Phpakefile not detected.');
   }
 
 }

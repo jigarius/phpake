@@ -3,17 +3,17 @@
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers PHPake
+ * @covers Phpake
  */
-class PHPakeTest extends TestCase {
+class PhpakeTest extends TestCase {
 
   public function testName() {
-    $app = new PHPake();
-    $this->assertSame(PHPake::NAME, $app->getName());
+    $app = new Phpake();
+    $this->assertSame(Phpake::NAME, $app->getName());
   }
 
   public function testVersion() {
-    $app = new PHPake();
+    $app = new Phpake();
     $this->assertMatchesRegularExpression(
       '/^\d+\.\d+.\d+(-(alpha|beta|rc)\.\d+)?$/',
       $app->getVersion()

@@ -1,9 +1,9 @@
 <?php
 
-namespace PHPake;
+namespace Phpake;
 
 use phpDocumentor\Reflection\DocBlockFactory;
-use PHPake\Argument\Argument;
+use Phpake\Argument\Argument;
 
 /**
  * A task, i.e. a command.
@@ -44,7 +44,7 @@ class Task extends \stdClass {
   /**
    * Get parameters for the callback associated to the task.
    *
-   * @return \PHPake\Argument\ArgumentInterface[]
+   * @return \Phpake\Argument\ArgumentInterface[]
    *   Callback parameters.
    */
   public function getArguments(): array {

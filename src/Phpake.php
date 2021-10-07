@@ -5,25 +5,25 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\ConsoleOutput;
-use PHPake\Commands\ExecCommand;
-use PHPake\PHPakeFile;
+use Phpake\Commands\ExecCommand;
+use Phpake\PhpakeFile;
 
 /**
  * A make-like built on PHP.
  */
-class PHPake extends Application {
+class Phpake extends Application {
 
   /**
    * Application name.
    */
-  const NAME = 'PHPake';
+  const NAME = 'Phpake';
 
   private ArgvInput $input;
 
   private ConsoleOutput $output;
 
   /**
-   * Creates a PHPake Application instance.
+   * Creates a Phpake Application instance.
    */
   public function __construct() {
     parent::__construct();
@@ -36,7 +36,7 @@ class PHPake extends Application {
   }
 
   public function require(string $path) {
-    $file = new PHPakeFile($path);
+    $file = new PhpakeFile($path);
     foreach ($file->getCallbacks() as $callback) {
       $command = new ExecCommand($callback);
       $this->add($command);

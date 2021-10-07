@@ -1,12 +1,12 @@
 <?php
 
-namespace PHPake\Commands;
+namespace Phpake\Commands;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use PHPake\Task;
+use Phpake\Task;
 
 /**
  * A command to execute Phpakefile tasks.
