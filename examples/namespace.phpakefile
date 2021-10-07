@@ -1,0 +1,60 @@
+<?php
+
+namespace Fizzbuzz;
+
+/**
+ * Converts a number into its FizzBuzz equivalent.
+ *
+ * This function won't be treated as a command because its name starts with
+ * an underscore.
+ *
+ * @param int $n An integer.
+ * @return string Fizz, buzz, fizzbuzz, or the number.
+ *
+ * @see https://en.wikipedia.org/wiki/Fizz_buzz
+ */
+function _fizzbuzz(int $n): string {
+  $isFizz = ($n % 3 == 0);
+  $isBuzz = ($n % 5 == 0);
+
+  if ($isFizz && $isBuzz) {
+    return 'fizzbuzz';
+  }
+
+  if ($isFizz) {
+    return 'fizz';
+  }
+
+  if ($isBuzz) {
+    return 'buzz';
+  }
+
+  return (string) $n;
+}
+
+function number(string $n, $output) {
+  if (!is_numeric($n)) {
+    $output->writeln('<error>n must be a positive integer.</error>');
+    return 1;
+  }
+
+  $result = _fizzbuzz($n);
+
+  if (is_numeric($result)) {
+    $output->writeln($result);
+    return;
+  }
+
+  $output->writeln("<info>$result</info>");
+}
+
+function range(string $n, $output) {
+  if (!is_numeric($n) || $n < 0) {
+    $output->writeln('<error>n must be a positive integer.</error>');
+    return 1;
+  }
+
+  for ($i = 1; $i <= $n; $i++) {
+    number($i, $output);
+  }
+}

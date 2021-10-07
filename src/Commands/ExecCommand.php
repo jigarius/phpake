@@ -22,6 +22,7 @@ class ExecCommand extends Command {
   protected function configure() {
     $task = new Task($this->getName());
     $this->setName($task->getCommand());
+    $this->setHidden($task->isHidden());
     $this->setDescription($task->getDescription());
 
     foreach ($task->getArguments() as $argument) {

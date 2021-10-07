@@ -38,7 +38,18 @@ class Task extends \stdClass {
   }
 
   public function getCommand(): string {
-    return str_replace('_', '-', $this->callback);
+    return str_replace(['_', '\\'], ['-', ':'], $this->callback);
+  }
+
+  /**
+   * Whether the task is exposed as a console command.
+   *
+   * If the callback name starts with an underscore, the command is hidden.
+   *
+   * @return bool
+   */
+  public function isHidden(): bool {
+    return str_starts_with($this->reflection->getShortName(), '_');
   }
 
   /**

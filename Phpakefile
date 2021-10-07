@@ -13,8 +13,16 @@ function hello_world() {
 }
 
 /**
+ * Function names starting with _ do not translate into commands.
+ */
+function _this_is_not_a_task() {
+  // Do something.
+}
+
+/**
  * Additional Phpakefile can be imported like a regular PHP file.
  */
 require_once __DIR__ . '/examples/input-output.phpakefile';
 require_once __DIR__ . '/examples/variadic.phpakefile';
 require_once __DIR__ . '/examples/shell.phpakefile';
+require_once __DIR__ . '/examples/namespace.phpakefile';
