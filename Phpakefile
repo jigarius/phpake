@@ -6,6 +6,11 @@
  */
 
 /**
+ * Additional Phpakefile can be imported like regular PHP files.
+ */
+require_once __DIR__ . DIRECTORY_SEPARATOR . '2.phpakefile';
+
+/**
  * List the contents of the working directory.
  *
  * Simply runs a system command and shows its output.
