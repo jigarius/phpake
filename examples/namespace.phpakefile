@@ -10,8 +10,6 @@ namespace Fizzbuzz;
  *
  * @param int $n An integer.
  * @return string Fizz, buzz, fizzbuzz, or the number.
- *
- * @see https://en.wikipedia.org/wiki/Fizz_buzz
  */
 function _fizzbuzz(int $n): string {
   $isFizz = ($n % 3 == 0);
@@ -32,6 +30,27 @@ function _fizzbuzz(int $n): string {
   return (string) $n;
 }
 
+/**
+ * Display fizz buzz for a number.
+ *
+ * Here's how you do Fizz Buzz.
+ *
+ * If the number is divisible by 3, "fizz" is displayed.
+ * If the number is divisible by 5, "buzz" is displayed.
+ * If the number is divisible by both, "fizzbuzz" is displayed.
+ * If the number is divisible by neither, the number is displayed.
+ *
+ * See https://en.wikipedia.org/wiki/Fizz_buzz
+ *
+ * @usage 3
+ * @usage 10
+ * @usage 13
+ * @usage 15
+ *
+ * @param string $n A positive integer.
+ * @param $output
+ * @return int|void
+ */
 function number(string $n, $output) {
   if (!is_numeric($n)) {
     $output->writeln('<error>n must be a positive integer.</error>');
@@ -48,6 +67,15 @@ function number(string $n, $output) {
   $output->writeln("<info>$result</info>");
 }
 
+/**
+ * Display fizz buzz for all numbers from 1 to n.
+ *
+ * @usage 20
+ *
+ * @param string $n A positive integer.
+ * @param $output
+ * @return int|void
+ */
 function range(string $n, $output) {
   if (!is_numeric($n) || $n < 0) {
     $output->writeln('<error>n must be a positive integer.</error>');

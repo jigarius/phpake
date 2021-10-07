@@ -10,6 +10,9 @@
  * To make the $rest argument optional, you can assign a default value of NULL
  * to it. It cannot take any other default values.
  *
+ * @usage India Colombia
+ * @usage India Colombia Canada
+ *
  * @param string $origin Starting location.
  * @param object $output
  * @param array $rest Other destinations.
