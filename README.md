@@ -56,11 +56,12 @@ A *Phpakefile* contains definitions of tasks that can be executed by Phpake.
 The following subheadings are about defining such tasks. A Phpake task definition
 is simply a PHP function (a task callback). Here's are some examples:
 
-- [Hello world](Phpakefile)
+- [Hello world](examples/hello-world.phpakefile)
 - [Input Output](examples/input-output.phpakefile)
-- [Namespaces](examples/variadic.phpakefile)
+- [Namespaces](examples/fizzbuzz.phpakefile)
 - [Variadic arguments](examples/variadic.phpakefile)
 - [Shell commands](examples/shell.phpakefile)
+- [Including commands](Phpakefile)
 
 ## Simple tasks
 

@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * Say hello world.
+ */
+function hello_world() {
+  echo 'Hello world' . PHP_EOL;
+}
+
+function hello_ladies() {
+  // Doc block comments are optional.
+  // This task will be recognized and it will work.
+}
+
+/**
+ * A task that fails and returns a non-zero error code.
+ */
+function make_a_mess() {
+  return 19;
+}
+
+/**
+ * Function names starting with _ do not translate into commands.
+ */
+function _this_is_not_a_task() {
+  // Do something.
+}
