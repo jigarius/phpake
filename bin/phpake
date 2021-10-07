@@ -1,9 +1,25 @@
 #!/usr/bin/env php
 <?php
 
+/**
+ * @file
+ * Phpake entrypoint.
+ */
+
 if (php_sapi_name() !== 'cli') exit;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+$autoload_candidates = [
+  // Development environment.
+  __DIR__ . '/../vendor/autoload.php',
+  // Global installation.
+  __DIR__ . '/../../../autoload.php',
+];
+foreach ($autoload_candidates as $candidate) {
+  if (is_file($candidate)) {
+    require_once $candidate;
+  }
+}
+unset($autoload_candidates);
 
 use Phpake\PhpakeFile;
 
