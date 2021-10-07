@@ -45,6 +45,10 @@ class Task extends \stdClass {
     return str_replace(['_', '\\'], ['-', ':'], $this->callback);
   }
 
+  public function getUsages(): array {
+    return $this->docblock->getTagsByName('usage');
+  }
+
   /**
    * Whether the task is exposed as a console command.
    *

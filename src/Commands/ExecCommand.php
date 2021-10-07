@@ -26,6 +26,10 @@ class ExecCommand extends Command {
     $this->setDescription($task->getSummary());
     $this->setHelp($task->getDescription());
 
+    foreach ($task->getUsages() as $usage) {
+      $this->addUsage($usage);
+    }
+
     foreach ($task->getArguments() as $argument) {
       if (is_a($argument, BuiltInArgument::class)) {
         continue;
