@@ -1,8 +1,0 @@
-<?php
-
-/**
- * Display hello world.
- */
-function hello_world() {
-  echo 'Hello world' . PHP_EOL;
-}

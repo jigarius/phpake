@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * Show today's date.
+ *
+ * Uses a Symphony Console Output to display output. $output is treated as any
+ * other optional argument. It is a built-in parameter that is automatically
+ * injected. Preferably, it should be kept towards the end, after all required
+ * parameters.
+ */
+function show_date($output) {
+  $datetime = new DateTime();
+  $output->writeln($datetime->format('M j, Y'));
+}
+
+/**
+ * Says hello to a human.
+ *
+ * Uses a required parameter, and an optional parameter. "param" annotations
+ * are used, to describe the parameters. These descriptions are displayed with
+ * command-specific help.
+ *
+ * For example, phpake hello-human --help.
+ *
+ * Notice how the in-built parameter $output was kept towards the end.
+ *
+ * @param string $fname First name.
+ * @param string|null $lname Last name.
+ * @param object $output
+ */
+function hello_human(string $fname, string $lname = NULL, $output = NULL) {
+  $name = $lname ? "$fname $lname" : "$fname";
+  $output->writeln("Hello <info>$name</info>!");
+}
+
+/**
+ * A task that fails and returns a non-zero error code.
+ */
+function make_a_mess() {
+  return 19;
+}

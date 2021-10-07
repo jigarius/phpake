@@ -1,0 +1,25 @@
+<?php
+
+/**
+ * Shows the path of an airplane flight.
+ *
+ * Uses the variadic argument $rest. $rest contains any additional
+ * arguments that might've been passed to the command, therefore, it must
+ * always be at the end.
+ *
+ * To make the $rest argument optional, you can assign a default value of NULL
+ * to it. It cannot take any other default values.
+ *
+ * @param string $origin Starting location.
+ * @param object $output
+ * @param array $rest Other destinations.
+ */
+function flight_path(string $origin, $output, array $rest) {
+  $destination = array_pop($rest);
+
+  $output->writeln("Origin: $origin");
+  foreach ($rest as $stop) {
+    $output->writeln("Stop: $stop");
+  }
+  $output->writeln("Destination: $destination");
+}

@@ -2,81 +2,19 @@
 
 /**
  * @file
- * A Makefile equivalent for PHP developers (:
+ * A Phpakefile is like a Makefile, but in PHP.
  */
 
 /**
- * Additional Phpakefile can be imported like regular PHP files.
+ * Display hello world.
  */
-require_once __DIR__ . DIRECTORY_SEPARATOR . '2.phpakefile';
-
-/**
- * List the contents of the working directory.
- *
- * Simply runs a system command and shows its output.
- */
-function ls() {
-  exec('ls', $output);
-  echo join(PHP_EOL, $output);
+function hello_world() {
+  echo 'Hello world' . PHP_EOL;
 }
 
 /**
- * Shows today's date.
- *
- * Uses a Symphony Console Output to display output. $output is treated as any
- * other optional argument. It is a built-in parameter that is automatically
- * injected. Preferably, it should be kept towards the end, after all required
- * parameters.
+ * Additional Phpakefile can be imported like a regular PHP file.
  */
-function show_date($output) {
-  $datetime = new DateTime();
-  $output->writeln($datetime->format('M j, Y'));
-}
-
-/**
- * Says hello to a human.
- *
- * Uses a required parameter, an optional parameter. "param" tags can be used,
- * to describe the parameters. These descriptions are displayed with
- * command-specific help. E.g. phpake hello-human --help. Notice how the
- * in-built parameter $output was kept towards the end.
- *
- * @param string $fname First name.
- * @param string|null $lname Last name.
- * @param object $output
- */
-function hello_human(string $fname, string $lname = NULL, $output = NULL) {
-  $name = $lname ? "$fname $lname" : "$fname";
-  $output->writeln("Hello <info>$name</info>!");
-}
-
-/**
- * Shows the path of an airplane flight.
- *
- * Uses the special catch-all argument $rest. $rest contains any additional
- * arguments that might've been passed to the command, therefore, it must
- * always be at the end.
- *
- * To make the $rest argument optional, you can assign a default value of NULL
- * to it. It cannot take any other default values.
- *
- * @param string $origin Starting location.
- * @param object $output
- * @param array $rest Other destinations.
- */
-function flight_path(string $origin, $output, array $rest) {
-  $destination = array_pop($rest);
-
-  $output->writeln("Origin: $origin");
-  foreach ($rest as $stop) {
-    $output->writeln("Stop: $stop");
-  }
-  $output->writeln("Destination: $destination");
-}
-
-/**
- * A task that fails and returns a non-zero error code.
- */
-function make_a_mess() {
-  return 19;
-}
+require_once __DIR__ . '/examples/input-output.phpakefile';
+require_once __DIR__ . '/examples/variadic.phpakefile';
+require_once __DIR__ . '/examples/shell.phpakefile';
