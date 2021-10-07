@@ -5,7 +5,7 @@ namespace Phpake\Argument;
 /**
  * A multi-value, catch-all argument.
  */
-class RestArgument extends Argument implements ArgumentInterface {
+class VariadicArgument extends Argument implements ArgumentInterface {
 
   protected function __construct(
     string $name,

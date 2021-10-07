@@ -5,15 +5,13 @@ namespace Phpake\Argument;
 /**
  * A standard argument.
  */
-class Argument implements ArgumentInterface {
+abstract class Argument implements ArgumentInterface {
 
   protected string $name;
 
   protected string $description;
 
   protected bool $isOptional;
-
-  protected bool $isBuiltIn;
 
   protected string|int|float|bool|NULL $defaultValue;
 
@@ -27,7 +25,6 @@ class Argument implements ArgumentInterface {
     $this->description = $description;
     $this->isOptional = $isOptional;
     $this->defaultValue = $defaultValue;
-    $this->isBuiltIn = FALSE;
   }
 
   final public static function create(
@@ -36,23 +33,11 @@ class Argument implements ArgumentInterface {
     bool $isOptional,
     $defaultValue
   ): ArgumentInterface {
-    if ($name === 'command') {
-      return new ConsoleCommandArgument($name);
-    }
-
-    if ($name === 'input') {
-      return new ConsoleInputArgument($name);
-    }
-
-    if ($name === 'output') {
-      return new ConsoleOutputArgument($name);
-    }
-
-    if ($name === 'rest') {
-      return new RestArgument($name, $description, $isOptional, $defaultValue);
-    }
-
-    return new Argument($name, $description, $isOptional, $defaultValue);
+    return match ($name) {
+      'command', 'input', 'output' => new BuiltInArgument($name),
+      'rest' => new VariadicArgument($name, $description, $isOptional, $defaultValue),
+      default => new RegularArgument($name, $description, $isOptional, $defaultValue),
+    };
   }
 
   final public function __get(string $name) {
@@ -73,10 +58,7 @@ class Argument implements ArgumentInterface {
   public function getDescription(): string {
     $description = $this->description;
 
-    if ($this->isBuiltIn) {
-      $description = "[Built-in] $description";
-    }
-    elseif ($this->isOptional) {
+    if ($this->isOptional) {
       $description = "[Optional] $description";
     }
 
@@ -87,11 +69,7 @@ class Argument implements ArgumentInterface {
     return $this->isOptional;
   }
 
-  public function getIsBuiltIn(): bool {
-    return $this->isBuiltIn;
-  }
-
-  public function getDefaultValue() {
+  public function getDefaultValue(): string|int|float|bool|NULL {
     return $this->defaultValue;
   }
 

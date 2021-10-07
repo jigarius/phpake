@@ -18,6 +18,4 @@ interface ArgumentInterface {
 
   public function getDefaultValue();
 
-  public function getIsBuiltIn();
-
 }

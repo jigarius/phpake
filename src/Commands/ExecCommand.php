@@ -6,6 +6,7 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Phpake\Argument\BuiltInArgument;
 use Phpake\Task;
 
 /**
@@ -24,7 +25,7 @@ class ExecCommand extends Command {
     $this->setDescription($task->getDescription());
 
     foreach ($task->getArguments() as $argument) {
-      if ($argument->getIsBuiltIn()) {
+      if (is_a($argument, BuiltInArgument::class)) {
         continue;
       }
 
