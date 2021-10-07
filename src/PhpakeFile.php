@@ -44,14 +44,11 @@ class PhpakeFile {
 
   public static function discover(): ?string {
     $path = getcwd();
-    do {
-      $candidate = $path . DIRECTORY_SEPARATOR . 'Phpakefile';
-      if (is_file($candidate)) {
-        return $candidate;
-      }
 
-      $path = dirname($path);
-    } while ($path !== DIRECTORY_SEPARATOR);
+    $candidate = $path . DIRECTORY_SEPARATOR . 'Phpakefile';
+    if (is_file($candidate)) {
+      return $candidate;
+    }
 
     throw new PhpakeException('Phpakefile not detected.');
   }
