@@ -6,3 +6,4 @@
 
 # Other
 .phpunit.cache
+.coverage

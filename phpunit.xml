@@ -24,8 +24,11 @@
             <directory suffix=".php">src</directory>
         </include>
         <report>
-            <text outputFile=".phpunit.cache/coverage.txt"
+            <text outputFile=".coverage/coverage.text"
                   showUncoveredFiles="true"></text>
+            <html outputDirectory=".coverage/coverage.html"
+                  lowUpperBound="50"
+                  highLowerBound="90"></html>
         </report>
     </coverage>
 </phpunit>
