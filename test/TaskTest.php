@@ -81,9 +81,20 @@ EOD,
     $this->helloHuman->getArguments());
   }
 
-  public function testExecute() {
+  /**
+   * If a callback returns a non-zero value, it is returned as is.
+   */
+  public function testExecuteReturnsNonZero() {
     $task = new Task('make_a_mess');
     $this->assertEquals(19, $task->execute([]));
+  }
+
+  /**
+   * If a callback returns nothing, execute() returns zero.
+   */
+  public function testExecuteReturnsZero() {
+    $this->expectOutputString('Hello world' . PHP_EOL);
+    $this->assertEquals(0, $this->helloWorld->execute([]));
   }
 
 }
