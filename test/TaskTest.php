@@ -22,9 +22,9 @@ class TaskTest extends TestCase {
   protected Task $helloHuman;
 
   public function setUp(): void {
-    $this->helloLadies = new Task('hello_ladies');
-    $this->helloWorld = new Task('hello_world');
-    $this->helloHuman = new Task('Input_Output\\hello_human');
+    $this->helloLadies = new Task(new ReflectionFunction('hello_ladies'));
+    $this->helloWorld = new Task(new ReflectionFunction('hello_world'));
+    $this->helloHuman = new Task(new ReflectionFunction('Input_Output\\hello_human'));
   }
 
   public function testGetCallback() {
@@ -66,10 +66,10 @@ EOD,
   public function testIsHidden() {
     $this->assertFalse($this->helloWorld->isHidden());
 
-    $task = new Task('_this_is_not_a_task');
+    $task = new Task(new ReflectionFunction('_this_is_not_a_task'));
     $this->assertTrue($task->isHidden());
 
-    $task = new Task('Fizzbuzz\\_fizzbuzz');
+    $task = new Task(new ReflectionFunction('Fizzbuzz\\_fizzbuzz'));
     $this->assertTrue($task->isHidden());
   }
 
@@ -83,13 +83,27 @@ EOD,
     $this->helloHuman->getArguments());
   }
 
+  public function testGetArgumentsCachesResults() {
+    $reflection = $this->getMockBuilder(\ReflectionFunction::class)
+      ->setConstructorArgs(['Input_Output\\hello_human'])
+      ->enableProxyingToOriginalMethods()
+      ->getMock();
+
+    $reflection->expects($this->exactly(1))
+      ->method('getParameters');
+
+    $task = new Task($reflection);
+    $task->getArguments();
+    $task->getArguments();
+  }
+
   /**
    * If a callback returns a non-zero value, it is returned as is.
    *
    * @covers \Phpake\Task::execute
    */
   public function testExecuteReturnsNonZero() {
-    $task = new Task('make_a_mess');
+    $task = new Task(new ReflectionFunction('make_a_mess'));
     $this->assertEquals(19, $task->execute([]));
   }
 

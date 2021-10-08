@@ -20,7 +20,7 @@ class ExecCommand extends Command {
   private Task $task;
 
   protected function configure() {
-    $task = new Task($this->getName());
+    $task = new Task(new \ReflectionFunction($this->getName()));
     $this->setName($task->getCommand());
     $this->setHidden($task->isHidden());
     $this->setDescription($task->getSummary());

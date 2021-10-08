@@ -10,8 +10,6 @@ use Phpake\Argument\Argument;
  */
 class Task extends \stdClass {
 
-  protected string $callback;
-
   protected \ReflectionFunction $reflection;
 
   protected array $arguments;
@@ -19,13 +17,11 @@ class Task extends \stdClass {
   /**
    * Creates a Phpake Task object for a callback.
    *
-   * @param callable $callback
-   *   A task callback, usually defined in a Phpakefile.
-   * @throws \ReflectionException
+   * @param \ReflectionFunction $reflection
+   *   A reflection of the task callback function.
    */
-  public function __construct(callable $callback) {
-    $this->callback = $callback;
-    $this->reflection = new \ReflectionFunction($callback);
+  public function __construct(\ReflectionFunction $reflection) {
+    $this->reflection = $reflection;
 
     $factory = DocBlockFactory::createInstance();
     if ($this->reflection->getDocComment() === FALSE) {
@@ -43,7 +39,7 @@ class Task extends \stdClass {
    *   Function name.
    */
   public function getCallback(): string {
-    return $this->callback;
+    return $this->reflection->getName();
   }
 
   /**
@@ -80,7 +76,7 @@ class Task extends \stdClass {
     return str_replace(
       ['_', '\\'],
       ['-', ':'],
-      strtolower($this->callback)
+      strtolower($this->reflection->getName())
     );
   }
 
@@ -154,7 +150,7 @@ class Task extends \stdClass {
    *   Exit code.
    */
   public function execute(array $args): int {
-    $result = call_user_func_array($this->callback, $args);
+    $result = call_user_func_array($this->reflection->getName(), $args);
     return is_int($result) ? $result : 0;
   }
 
