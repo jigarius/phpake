@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase as TestCaseBase;
 /**
  * Phpake Test Case.
  */
-class TestCase extends TestCaseBase {
+abstract class TestCase extends TestCaseBase {
 
   /**
    * Creates a temporary file with the given contents.
