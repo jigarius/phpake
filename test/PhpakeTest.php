@@ -4,7 +4,7 @@ use PHPUnit\Framework\TestCase;
 use Phpake\Phpake;
 
 /**
- * @covers Phpake
+ * @covers \Phpake\Phpake
  */
 class PhpakeTest extends TestCase {
 

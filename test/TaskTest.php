@@ -9,7 +9,9 @@ require_once __DIR__ . '/../examples/input-output.phpakefile';
 require_once __DIR__ . '/../examples/fizzbuzz.phpakefile';
 
 /**
- * @covers Task
+ * @covers \Phpake\Task
+ * @uses \Phpake\Argument\Argument
+ * @uses \Phpake\Argument\BuiltInArgument
  */
 class TaskTest extends TestCase {
 
@@ -83,6 +85,8 @@ EOD,
 
   /**
    * If a callback returns a non-zero value, it is returned as is.
+   *
+   * @covers \Phpake\Task::execute
    */
   public function testExecuteReturnsNonZero() {
     $task = new Task('make_a_mess');
@@ -91,6 +95,8 @@ EOD,
 
   /**
    * If a callback returns nothing, execute() returns zero.
+   *
+   * @covers \Phpake\Task::execute
    */
   public function testExecuteReturnsZero() {
     $this->expectOutputString('Hello world' . PHP_EOL);

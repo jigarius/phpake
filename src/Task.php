@@ -16,6 +16,13 @@ class Task extends \stdClass {
 
   protected array $arguments;
 
+  /**
+   * Creates a Phpake Task object for a callback.
+   *
+   * @param callable $callback
+   *   A task callback, usually defined in a Phpakefile.
+   * @throws \ReflectionException
+   */
   public function __construct(callable $callback) {
     $this->callback = $callback;
     $this->reflection = new \ReflectionFunction($callback);
