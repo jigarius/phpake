@@ -5,6 +5,7 @@ use Phpake\Phpake;
 
 /**
  * @covers \Phpake\Phpake
+ * @uses \Phpake\Phpakefile
  */
 class PhpakeTest extends TestCase {
 
