@@ -34,6 +34,9 @@
   },
   "scripts": {
     "lint": "composer exec phpcs",
-    "test": "composer exec phpunit"
+    "test": [
+      "XDEBUG_MODE=coverage composer exec phpunit",
+      "cat .phpunit.cache/coverage.txt"
+    ]
   }
 }
