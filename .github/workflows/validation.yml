@@ -12,8 +12,8 @@ jobs:
       - name: Prepare
         run: composer install
       - name: Lint
-        run: composer lint
+        run: make lint
       - name: Test
-        run: composer test
+        run: make test
       - name: Coverage
-        run: cat .coverage/text
+        run: make coverage-text
