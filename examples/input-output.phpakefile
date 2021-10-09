@@ -35,3 +35,7 @@ function hello_human(string $fname, string $lname = NULL, $output = NULL) {
   $name = $lname ? "$fname $lname" : "$fname";
   $output->writeln("Hello <info>$name</info>!");
 }
+
+function _do_nothing() {
+
+}
