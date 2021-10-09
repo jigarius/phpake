@@ -35,7 +35,7 @@ class ExecCommand extends Command {
         continue;
       }
 
-      $mode = $argument->isOptional ? InputArgument::OPTIONAL : InputArgument::REQUIRED;
+      $mode = $argument->getIsOptional() ? InputArgument::OPTIONAL : InputArgument::REQUIRED;
       if ($argument->getName() === 'rest') {
         $mode = $mode | InputArgument::IS_ARRAY;
       }
