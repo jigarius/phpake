@@ -14,6 +14,7 @@ abstract class TestCase extends TestCaseBase {
    *
    * @param string $data
    *   Contents to write to the file.
+   *
    * @return string
    *   Path to the file.
    */
