@@ -15,13 +15,6 @@ class PhpakeFile {
   protected string $path;
 
   /**
-   * Callbacks contained in the Phpakefile.
-   *
-   * @var array
-   */
-  protected array $callbacks;
-
-  /**
    * Phpakefile callback registry.
    *
    * Callbacks in a Phpakefile are detected using get_defined_functions().
@@ -40,13 +33,8 @@ class PhpakeFile {
   protected static array $registry;
 
   public function __construct(string $path) {
-    $realpath = realpath($path);
-    if ($realpath === FALSE) {
-      throw new PhpakeException("File not found: $path");
-    }
-
-    $this->path = $realpath;
-    $this->callbacks = $this->detectCallbacks();
+    $this->path = realpath($path);
+    self::require($path);
   }
 
   public function getPath(): string {
@@ -54,35 +42,40 @@ class PhpakeFile {
   }
 
   public function getCallbacks(): array {
-    return $this->callbacks;
+    return self::$registry[$this->path];
   }
 
   /**
    * Detects callbacks from defined in a Phpakefile.
    *
-   * @return array
-   *   Function names.
+   * @param string $path
+   *   Path to a Phpakefile.
    *
    * @throws PhpakeException
    */
-  protected function detectCallbacks(): array {
-    if (isset(self::$registry[$this->path])) {
-      return self::$registry[$this->path];
+  public static function require(string $path) {
+    $realpath = realpath($path);
+    if ($realpath === FALSE) {
+      throw new PhpakeException("File not found: $path");
     }
 
-    if (in_array($this->path, get_included_files())) {
+    if (isset(self::$registry[$realpath])) {
+      return;
+    }
+
+    if (in_array($realpath, get_included_files())) {
       // We use 'get_defined_functions()' for discovery. If the file has
       // already been included, we cannot detect the callbacks defined in
       // the file (unless we parse it ourselves). Thus, we resort to this
       // easy solution: one file can only be loaded once.
-      throw new PhpakeException("Phpakefile was already included: $this->path");
+      throw new PhpakeException("Phpakefile was already included: $path");
     }
 
     $old_funcs = get_defined_functions()['user'];
-    require_once $this->path;
+    require_once $realpath;
     $new_funcs = get_defined_functions()['user'];
 
-    return self::$registry[$this->path] = array_values(array_diff($new_funcs, $old_funcs));
+    self::$registry[$realpath] = array_values(array_diff($new_funcs, $old_funcs));
   }
 
   /**

@@ -115,12 +115,11 @@ EOF
   /**
    * PhpakeFile only cares about absolute, resolved paths.
    */
-  public function testInstanceRelies() {
+  public function testUsesResolvedPath() {
     $func = 'callback_' . uniqid();
-
     $path = static::createTempFile("<?php function $func() {}");
-
     $file = new PhpakeFile($path);
+
     $this->assertEquals([$func], $file->getCallbacks());
 
     $info = (object) pathinfo($path);
@@ -128,6 +127,17 @@ EOF
     mkdir("$info->dirname/$dirname");
     $file = new PhpakeFile("$info->dirname/$dirname/../$info->basename");
     $this->assertEquals([$func], $file->getCallbacks());
+  }
+
+  public function testRequire() {
+    $func = 'callback_' . uniqid();
+    $path = static::createTempFile("<?php function $func() {}");
+    PhpakeFile::require($path);
+
+    $this->assertTrue(function_exists($func));
+
+    // The second call doesn't raise an exception.
+    PhpakeFile::require($path);
   }
 
   public function testDiscoverWithNoPhpakefile() {
