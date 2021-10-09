@@ -33,7 +33,7 @@ class PhpakeTest extends TestCase {
   public function testRequire() {
     $app = new PHPake();
 
-    $app->require(dirname(__DIR__) . '/examples/hello-world.phpakefile');
+    $app->require(__DIR__ . '/../examples/hello-world.phpakefile');
     $this->assertCount(6, $app->all());
   }
 

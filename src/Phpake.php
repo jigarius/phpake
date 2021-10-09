@@ -41,8 +41,6 @@ class Phpake extends Application {
    *
    * @param string $path
    *   Path to Phpakefile.
-   *
-   * @throws PhpakeException
    */
   public function require(string $path) {
     $file = new PhpakeFile($path);
