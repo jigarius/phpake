@@ -67,7 +67,7 @@ EOF
   }
 
   /**
-   * 2 PhpakeFile instances with the same path can be created.
+   * Two PhpakeFile instances with the same path can be created.
    */
   public function testRepeatInstance() {
     $func = 'callback_' . uniqid();
@@ -110,6 +110,24 @@ EOF
       new PhpakeException("Phpakefile was already included: $path")
     );
     new PhpakeFile($path);
+  }
+
+  /**
+   * PhpakeFile only cares about absolute, resolved paths.
+   */
+  public function testInstanceRelies() {
+    $func = 'callback_' . uniqid();
+
+    $path = static::createTempFile("<?php function $func() {}");
+
+    $file = new PhpakeFile($path);
+    $this->assertEquals([$func], $file->getCallbacks());
+
+    $info = (object) pathinfo($path);
+    $dirname = 'directory.' . uniqid();
+    mkdir("$info->dirname/$dirname");
+    $file = new PhpakeFile("$info->dirname/$dirname/../$info->basename");
+    $this->assertEquals([$func], $file->getCallbacks());
   }
 
   public function testDiscoverWithNoPhpakefile() {

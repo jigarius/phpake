@@ -21,14 +21,31 @@ class PhpakeFile {
    */
   protected array $callbacks;
 
-  static protected array $registry = [];
+  /**
+   * Phpakefile callback registry.
+   *
+   * Callbacks in a Phpakefile are detected using get_defined_functions().
+   * We compute a diff between the user-defined functions before and after
+   * including a Phpakefile. Hence, we can only detect the callback names when
+   * a Phpakefile is being included for the first time.
+   *
+   * If a new instance of PhpakeFile is created, it is impossible to detect
+   * callback names (unless we parse the file ourselves). To work around this
+   * problem, we track all callbacks in this registry. The keys of this assoc
+   * are real paths to any loaded Phpakefile. The values are a list of
+   * callbacks found within those files.
+   *
+   * @var array
+   */
+  protected static array $registry;
 
   public function __construct(string $path) {
-    if (!is_file($path)) {
+    $realpath = realpath($path);
+    if ($realpath === FALSE) {
       throw new PhpakeException("File not found: $path");
     }
 
-    $this->path = $path;
+    $this->path = $realpath;
     $this->callbacks = $this->detectCallbacks();
   }
 
@@ -41,12 +58,14 @@ class PhpakeFile {
   }
 
   /**
-   * Detects callbacks from a Phpakefile.
+   * Detects callbacks from defined in a Phpakefile.
    *
    * @return array
    *   Function names.
+   *
+   * @throws PhpakeException
    */
-  protected function detectCallbacks() {
+  protected function detectCallbacks(): array {
     if (isset(self::$registry[$this->path])) {
       return self::$registry[$this->path];
     }
@@ -70,6 +89,8 @@ class PhpakeFile {
    * Discover a Phpakefile depending on the current working directory.
    *
    * @return string|null
+   *   Path to a Phpakefile, if found.
+   *
    * @throws PhpakeException
    */
   public static function discover(): ?string {
