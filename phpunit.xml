@@ -24,9 +24,9 @@
             <directory suffix=".php">src</directory>
         </include>
         <report>
-            <text outputFile=".coverage/coverage.text"
+            <text outputFile=".coverage/text"
                   showUncoveredFiles="true"></text>
-            <html outputDirectory=".coverage/coverage.html"
+            <html outputDirectory=".coverage/html"
                   lowUpperBound="50"
                   highLowerBound="90"></html>
         </report>
