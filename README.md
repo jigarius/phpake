@@ -10,7 +10,7 @@ Ruby syntax. When I work with PHP, I often miss having a similar tool that
 is easy to install, easy to use, and allows full-fledged PHP syntax. Thus,
 Phpake was born.
 
-I hope you like it and if you do, feel free to leave a `$tip`.
+I invite you to use it, and I hope you like it.
 
 ~ [Jigarius](https://jigarius.com/)
 
