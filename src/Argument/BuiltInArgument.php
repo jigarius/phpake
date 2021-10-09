@@ -13,11 +13,11 @@ class BuiltInArgument extends Argument implements ArgumentInterface {
     bool $isOptional = NULL,
     $defaultValue = NULL
   ) {
-    if ($description || $isOptional || $defaultValue) {
-      throw new \InvalidArgumentException('Built-in Argument only expects name.');
-    }
-
     parent::__construct($name, '', TRUE, NULL);
+  }
+
+  public function getDescription(): string {
+    return '';
   }
 
 }

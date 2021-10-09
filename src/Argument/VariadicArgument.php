@@ -14,15 +14,10 @@ class VariadicArgument extends Argument implements ArgumentInterface {
     $defaultValue
   ) {
     if (!is_null($defaultValue)) {
-      throw new \InvalidArgumentException('RestArgument default value must be NULL.');
+      throw new \InvalidArgumentException('Variadic argument default value must be NULL');
     }
 
-    parent::__construct(
-      $name,
-      $description ?: 'Rest of the arguments.',
-      $isOptional = $isOptional,
-      $defaultValue = $defaultValue
-    );
+    parent::__construct($name, $description, $isOptional, $defaultValue);
   }
 
 }

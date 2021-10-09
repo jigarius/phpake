@@ -17,9 +17,9 @@ abstract class Argument implements ArgumentInterface {
 
   protected function __construct(
     string $name,
-    string $description,
-    bool $isOptional,
-    $defaultValue
+    string $description = '',
+    bool $isOptional = TRUE,
+    $defaultValue = NULL
   ) {
     $this->name = $name;
     $this->description = $description;
@@ -29,9 +29,9 @@ abstract class Argument implements ArgumentInterface {
 
   final public static function create(
     string $name,
-    string $description,
-    bool $isOptional,
-    $defaultValue
+    string $description = '',
+    bool $isOptional = TRUE,
+    string|int|float|bool|NULL $defaultValue = NULL
   ): ArgumentInterface {
     return match ($name) {
       'command', 'input', 'output' => new BuiltInArgument($name),
@@ -40,23 +40,12 @@ abstract class Argument implements ArgumentInterface {
     };
   }
 
-  final public function __get(string $name) {
-    return match ($name) {
-      'name' => $this->getName(),
-      'description' => $this->getDescription(),
-      'isOptional' => $this->getIsOptional(),
-      'isBuiltIn' => $this->getIsBuiltIn(),
-      'defaultValue' => $this->getDefaultValue(),
-      default => throw new \InvalidArgumentException("Invalid property: $name"),
-    };
-  }
-
-  public function getName(): string {
+  final public function getName(): string {
     return $this->name;
   }
 
   public function getDescription(): string {
-    $description = $this->description;
+    $description = $this->description ?? '';
 
     if ($this->isOptional) {
       $description = "[Optional] $description";
@@ -65,11 +54,11 @@ abstract class Argument implements ArgumentInterface {
     return $description;
   }
 
-  public function getIsOptional(): bool {
+  final public function getIsOptional(): bool {
     return $this->isOptional;
   }
 
-  public function getDefaultValue(): string|int|float|bool|NULL {
+  final public function getDefaultValue(): string|int|float|bool|NULL {
     return $this->defaultValue;
   }
 
