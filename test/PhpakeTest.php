@@ -1,11 +1,13 @@
 <?php
 
-use PHPUnit\Framework\TestCase;
 use Phpake\Phpake;
+use Phpake\TestCase;
 
 /**
  * @covers \Phpake\Phpake
  * @uses \Phpake\Phpakefile
+ * @uses \Phpake\Task
+ * @uses \Phpake\Commands\ExecCommand
  */
 class PhpakeTest extends TestCase {
 
@@ -26,6 +28,13 @@ class PhpakeTest extends TestCase {
 
     $this->assertNotEmpty($json_data->version);
     $this->assertEquals($json_data->version, $app->getVersion());
+  }
+
+  public function testRequire() {
+    $app = new PHPake();
+
+    $app->require(dirname(__DIR__) . '/examples/hello-world.phpakefile');
+    $this->assertCount(6, $app->all());
   }
 
 }

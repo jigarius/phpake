@@ -36,6 +36,14 @@ class Phpake extends Application {
     $this->configureIO($this->input, $this->output);
   }
 
+  /**
+   * Gets callbacks from a Phpakefile and adds them as commands.
+   *
+   * @param string $path
+   *   Path to Phpakefile.
+   *
+   * @throws PhpakeException
+   */
   public function require(string $path) {
     $file = new PhpakeFile($path);
     foreach ($file->getCallbacks() as $callback) {
