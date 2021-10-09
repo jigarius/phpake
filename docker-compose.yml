@@ -7,5 +7,7 @@ services:
     build:
       context: .
       dockerfile: .docker/main/Dockerfile
+    ports:
+      - "9000:9000"
     volumes:
       - .:/app
