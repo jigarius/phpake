@@ -1,7 +1,7 @@
 {
   "name": "jigarius/phpake",
   "description": "Phpake is a make-like utility built for PHP.",
-  "version": "0.5.0-alpha.1",
+  "version": "1.0.0-beta.1",
   "homepage": "https://github.com/jigarius/phpake",
   "license": "GPL-3.0-only",
   "keywords": [],

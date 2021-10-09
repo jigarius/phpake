@@ -29,7 +29,7 @@ class Phpake extends Application {
   public function __construct() {
     parent::__construct();
     $this->setName(self::NAME);
-    $this->setVersion('0.5.0-alpha.1');
+    $this->setVersion('1.0.0-beta.1');
 
     $this->input = new ArgvInput();
     $this->output = new ConsoleOutput();
