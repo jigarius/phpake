@@ -1,14 +1,14 @@
 # Phpake
 
 Phpake is a make-like utility built for PHP. It is pronounced *fake* because
-the second *p* is silent just like the second `p` in the word *elephpant*.
+the second *p* is silent just like the second *p* in the word *elephpant*.
 
 I've always found writing a `Makefile` quite challenging because the syntax
 is similar to the shell syntax, but quite different at the same time.
-When I'm working with Ruby, I use `rake` and it's awesome because it uses
-Ruby syntax. When I work with PHP, I often miss having a similar tool that
-is easy to install, easy to use, and allows full-fledged PHP syntax. Thus,
-Phpake was born.
+When I'm working with Ruby, I use [rake](https://github.com/ruby/rake) and
+it's awesome because it uses Ruby syntax. When I work with PHP, I often
+miss having a similar tool that is easy to install, easy to use, and allows
+full-fledged PHP syntax. Thus, Phpake was born.
 
 I invite you to use it, and I hope you like it.
 
