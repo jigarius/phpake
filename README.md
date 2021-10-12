@@ -168,3 +168,9 @@ After the initial setup, you can use the following commands:
   - You'll spend most of your time here
   - The command `phpake` should be available
 - `docker compose stop`: Stops the project's containers when you're done
+
+## Links
+
+- [Phpake on Packagist](https://packagist.org/packages/jigarius/phpake)
+- [Phpake: A Tool like Make/Rake Built for PHP](https://jigarius.com/blog/phpake) article on Jigarius.com
+- Phpake video tutorial (coming soon)
