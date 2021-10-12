@@ -36,10 +36,10 @@ class ExecCommandTest extends TestCase {
     $this->assertEquals(
       <<<EOF
 Uses a required parameter, and an optional parameter. "param" annotations
-are used, to describe the parameters. These descriptions are displayed with
+are used to describe the parameters. These descriptions are displayed with
 command-specific help.
 
-Notice how the in-built parameter \$output was kept towards the end.
+Notice how the built-in parameter \$output was kept towards the end.
 EOF,
       $this->command->getHelp()
     );
@@ -72,7 +72,7 @@ EOF,
   public function testRestArgument() {
     PhpakeFile::require(__DIR__ . '/../../examples/variadic.phpakefile');
 
-    $callback = 'flight_path';
+    $callback = 'Input_Output\\flight_path';
     $task = new Task(new ReflectionFunction($callback));
     $command = new ExecCommand($callback);
 

@@ -56,10 +56,10 @@ class TaskTest extends TestCase {
     $this->assertEquals(
       <<<EOD
 Uses a required parameter, and an optional parameter. "param" annotations
-are used, to describe the parameters. These descriptions are displayed with
+are used to describe the parameters. These descriptions are displayed with
 command-specific help.
 
-Notice how the in-built parameter \$output was kept towards the end.
+Notice how the built-in parameter \$output was kept towards the end.
 EOD,
       $this->helloHuman->getDescription()
     );
