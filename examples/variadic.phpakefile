@@ -1,5 +1,7 @@
 <?php
 
+namespace Input_Output;
+
 /**
  * Shows the path of an airplane flight.
  *

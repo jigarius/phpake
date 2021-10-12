@@ -15,7 +15,7 @@ function ls() {
 /**
  * Open an SSH connection.
  *
- * Here, $rest expects arguments that look like options/switches. By default
+ * Here, $rest expects arguments that look like options/switches. By default,
  * Phpake sees them as invalid options/switches. To make it clear that those
  * switches are nothing but multiple string arguments, we put -- before them.
  *

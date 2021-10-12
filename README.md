@@ -141,6 +141,14 @@ function hello_group(string $you, string $rest) {
 If a default value of `NULL` is assigned to `$rest`, it becomes optional,
 otherwise, it requires one or more values.
 
+### Helpers
+
+Say, you have a function that helps other tasks but it is not a command by
+itself. Such functions can be put in a `Phpakefile` too. However, so that
+Phpake doesn't confuse them for commands, the function name must begin with
+an underscore. For example a function named `_foo()` will not result in a
+command named `phpake foo` because the function name starts with an underscore.
+
 ## Development
 
 This project uses a Dockerized development environment. Run the project as
