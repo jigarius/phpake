@@ -3,7 +3,7 @@ root = true
 [*]
 end_of_line = lf
 
-[*.php]
+[{*.php,*.yml}]
 insert_final_newline = true
 tab_width = 2
 
