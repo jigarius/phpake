@@ -1,0 +1,20 @@
+grumphp:
+  ascii:
+    failed: vendor/phpro/grumphp/resources/ascii/failed.txt
+    succeeded: vendor/phpro/grumphp/resources/ascii/succeeded.txt
+  fixer:
+    enabled: false
+  git_hook_variables:
+    EXEC_GRUMPHP_COMMAND: 'docker compose exec -T main'
+  tasks:
+    composer: null
+    composer_normalize: null
+    git_commit_message:
+      enforce_no_subject_trailing_period: true
+      enforce_single_lined_subject: true
+      max_body_width: 72
+      max_subject_width: 60
+      case_insensitive: true
+      multiline: true
+    phpcs: null
+    phpunit: null
