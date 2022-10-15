@@ -19,6 +19,11 @@ class Phpake extends Application {
    */
   const NAME = 'Phpake';
 
+  /**
+   * Application version.
+   */
+  const VERSION = '1.0.0';
+
   private ArgvInput $input;
 
   private ConsoleOutput $output;
@@ -29,7 +34,7 @@ class Phpake extends Application {
   public function __construct() {
     parent::__construct();
     $this->setName(self::NAME);
-    $this->setVersion('1.0.0-beta.1');
+    $this->setVersion(self::VERSION);
 
     $this->input = new ArgvInput();
     $this->output = new ConsoleOutput();
