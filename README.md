@@ -164,10 +164,11 @@ When developing for the first time,
 After the initial setup, you can use the following commands:
 
 - `docker compose start`: Start the project's containers
-- `docker compose exec main sh`: Launch a shell inside the project's container
+- `make ssh`: Launch a shell inside the project's container
   - You'll spend most of your time here
   - The command `phpake` should be available
 - `docker compose stop`: Stops the project's containers when you're done
+- See the `Makefile` for more helpful commands
 
 ## Links
 
