@@ -89,6 +89,14 @@ class Task extends \stdClass {
    *   Usage examples.
    */
   public function getUsages(): array {
+    $attrs = $this->reflection->getAttributes('Usage');
+    foreach ($attrs as $attr) {
+      echo $attr->getName() . PHP_EOL;
+      foreach ($attr->getArguments() as $arg) {
+        echo $arg . PHP_EOL;
+      }
+      exit;
+    }
     return array_map('strval', $this->docblock->getTagsByName('usage'));
   }
 

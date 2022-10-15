@@ -15,6 +15,8 @@ function show_date($output) {
   $output->writeln($datetime->format('M j, Y'));
 }
 
+#[Phpake\Usage('Niki')]
+#[Phpake\Usage('Niki Martin')]
 /**
  * Say hello to a human.
  *
