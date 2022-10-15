@@ -27,6 +27,7 @@ function ls() {
  */
 function ssh(string $host, string $user = NULL, array $rest = NULL) {
   $command = "ssh $user@$host " . join(' ', $rest);
+  // Depending on the command, you can also use: passthru($command);
   $process = proc_open($command, [STDIN, STDOUT, STDERR], $pipes);
   proc_close($process);
 }
