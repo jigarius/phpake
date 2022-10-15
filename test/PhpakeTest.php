@@ -34,7 +34,9 @@ class PhpakeTest extends TestCase {
     $app = new PHPake();
 
     $app->require(__DIR__ . '/../examples/hello-world.phpakefile');
-    $this->assertCount(6, $app->all());
+    // 2 commands (help and list) are automatically added by Symfony Console.
+    // 2 commands are hidden, i.e. have _ in the beginning.
+    $this->assertCount(8, $app->all());
   }
 
 }
