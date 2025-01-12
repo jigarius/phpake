@@ -63,7 +63,7 @@ class Phpake extends Application {
   /**
    * {@inheritdoc}
    */
-  public function run(InputInterface $input = NULL, OutputInterface $output = NULL): int {
+  public function run(?InputInterface $input = NULL, ?OutputInterface $output = NULL): int {
     return parent::run($input ?? $this->input, $output ?? $this->output);
   }
 

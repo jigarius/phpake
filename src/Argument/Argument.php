@@ -19,7 +19,7 @@ abstract class Argument implements ArgumentInterface {
     string $name,
     string $description = '',
     bool $isOptional = TRUE,
-    $defaultValue = NULL
+    $defaultValue = NULL,
   ) {
     $this->name = $name;
     $this->description = $description;
@@ -31,7 +31,7 @@ abstract class Argument implements ArgumentInterface {
     string $name,
     string $description = '',
     bool $isOptional = TRUE,
-    string|int|float|bool|NULL $defaultValue = NULL
+    string|int|float|bool|NULL $defaultValue = NULL,
   ): ArgumentInterface {
     return match ($name) {
       'command', 'input', 'output' => new BuiltInArgument($name),
