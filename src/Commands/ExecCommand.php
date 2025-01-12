@@ -51,7 +51,7 @@ class ExecCommand extends Command {
     $this->task = $task;
   }
 
-  protected function execute(InputInterface $input, OutputInterface $output) {
+  protected function execute(InputInterface $input, OutputInterface $output): int {
     $values = $input->getArguments();
     $values['input'] = $input;
     $values['output'] = $output;
