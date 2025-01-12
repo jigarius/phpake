@@ -1,5 +1,3 @@
-version: '4'
-
 services:
   main:
     image: php:8-phpake
