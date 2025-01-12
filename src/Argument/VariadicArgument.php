@@ -11,7 +11,7 @@ class VariadicArgument extends Argument implements ArgumentInterface {
     string $name,
     string $description,
     bool $isOptional,
-    $defaultValue
+    $defaultValue,
   ) {
     if (!is_null($defaultValue)) {
       throw new \InvalidArgumentException('Variadic argument default value must be NULL');

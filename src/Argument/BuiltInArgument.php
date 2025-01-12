@@ -9,11 +9,11 @@ class BuiltInArgument extends Argument implements ArgumentInterface {
 
   protected function __construct(
     string $name,
-    string $description = NULL,
-    bool $isOptional = NULL,
-    $defaultValue = NULL
+    string $description = '',
+    bool $isOptional = TRUE,
+    $defaultValue = NULL,
   ) {
-    parent::__construct($name, '', TRUE, NULL);
+    parent::__construct($name);
   }
 
   public function getDescription(): string {
