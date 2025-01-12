@@ -8,7 +8,7 @@ COPY . /app
 ENV PATH="/app/bin:${PATH}:/app/vendor/bin"
 ENV PHP_INI_PATH="$PHP_INI_DIR/conf.d/php.ini"
 
-RUN apk --update add make git g++ autoconf
+RUN apk --update add make git g++ autoconf linux-headers
 
 RUN cp "$PHP_INI_DIR/php.ini-development" "$PHP_INI_PATH" \
     && pear config-set php_ini "$PHP_INI_PATH" \
