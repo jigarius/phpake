@@ -2,7 +2,9 @@
   "name": "jigarius/phpake",
   "description": "Phpake is a make-like utility built for PHP.",
   "license": "GPL-3.0-only",
-  "keywords": ["make"],
+  "keywords": [
+    "make"
+  ],
   "authors": [
     {
       "name": "Jerry Jigarius Radwick",
