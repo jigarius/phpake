@@ -14,15 +14,15 @@
   ],
   "homepage": "https://github.com/jigarius/phpake",
   "require": {
-    "php": ">= 8.0",
+    "php": "^8.3",
     "phpdocumentor/reflection-docblock": "^5.2",
-    "symfony/console": "^5.3"
+    "symfony/console": "^6 || ^7"
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
     "drupal/coder": "^8.3",
     "ergebnis/composer-normalize": "^2.28",
-    "phpro/grumphp": "^1.13",
+    "phpro/grumphp": "^2",
     "phpunit/phpunit": "^9.5"
   },
   "autoload": {
@@ -39,8 +39,8 @@
   "config": {
     "allow-plugins": {
       "dealerdirect/phpcodesniffer-composer-installer": true,
-      "phpro/grumphp": true,
-      "ergebnis/composer-normalize": true
+      "ergebnis/composer-normalize": true,
+      "phpro/grumphp": true
     }
   }
 }
