@@ -1,5 +1,6 @@
 <?php
 
+use Composer\InstalledVersions;
 use Phpake\Phpake;
 use Phpake\TestCase;
 
@@ -18,16 +19,10 @@ class PhpakeTest extends TestCase {
 
   public function testVersion() {
     $app = new Phpake();
-    $this->assertMatchesRegularExpression(
-      '/^\d+\.\d+.\d+(-(alpha|beta|rc)\.\d+)?$/',
-      $app->getVersion()
+    $this->assertEquals(
+        InstalledVersions::getPrettyVersion('jigarius/phpake'),
+        $app->getVersion()
     );
-
-    $json_path = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'composer.json';
-    $json_data = json_decode(file_get_contents($json_path));
-
-    $this->assertNotEmpty($json_data->version);
-    $this->assertEquals($json_data->version, $app->getVersion());
   }
 
   public function testRequire() {

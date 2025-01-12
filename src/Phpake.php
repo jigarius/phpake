@@ -2,6 +2,7 @@
 
 namespace Phpake;
 
+use Composer\InstalledVersions;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\ArgvInput;
@@ -32,12 +33,15 @@ class Phpake extends Application {
    * Creates a Phpake Application instance.
    */
   public function __construct() {
-    parent::__construct();
-    $this->setName(self::NAME);
-    $this->setVersion(self::VERSION);
+    parent::__construct(
+        self::NAME,
+        InstalledVersions::getPrettyVersion('jigarius/phpake'),
+    );
 
+    // @todo Not required. Remove after refactoring.
     $this->input = new ArgvInput();
     $this->output = new ConsoleOutput();
+
     $this->configureIO($this->input, $this->output);
   }
 
